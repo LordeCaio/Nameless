@@ -39,7 +39,7 @@ public class Bullet extends Entity{
 	public void destroySelf() {	
 		lifeSpam++;
 		if(lifeSpam >= life) {
-			Data.Entity.add(new Explosion((int)x, (int)y, 32, 32, null));			
+			Data.Entity.add(new Explosion(this.getX(), this.getY(), 32, 32, null));			
 			Data.Bullet.remove(this);
 			return;
 		}
