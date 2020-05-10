@@ -12,7 +12,7 @@ public class Bullet extends Entity{
 	private int dx, dy;
 	private double speed = 2.5;
 	
-	private int life = 100, lifeSpam = 0;
+	private int life = 50, lifeSpam = 0;
 
 	public BufferedImage bullet;
 	
@@ -39,6 +39,8 @@ public class Bullet extends Entity{
 	public void destroySelf() {	
 		lifeSpam++;
 		if(lifeSpam >= life) {
+			Data.Entity.add(new Explosion((int)x, (int)y, 32, 32, null));
+			
 			Data.Bullet.remove(this);
 			return;
 		}
