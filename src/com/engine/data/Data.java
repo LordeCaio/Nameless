@@ -63,7 +63,10 @@ public abstract class Data {
 		
 	//COLLECTIBLES:
 	public static Sprite_Entity spr_Collectible_01 = new Sprite_Entity("/Entity/spr_Collectible01.png");
-	
+
+	//EXPLOSIONS:
+	public static Sprite_Entity spr_Explosion = new Sprite_Entity("/Entity/spr_Explosion.png");
+
 	//BULLETS:
 	public static Sprite_Entity spr_Bullet_01 = new Sprite_Entity("/Entity/spr_Bullet01.png");
 	
