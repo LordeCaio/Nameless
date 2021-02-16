@@ -46,7 +46,7 @@ public class Input implements KeyListener{
 			}
 			
 			if(e.getKeyCode() == KeyEvent.VK_SHIFT) {
-				if(Data.Player.hasGun && ShiftPress == false) {
+				if(Data.Player.hasGun && !ShiftPress) {
 					ShiftPress = true;
 					Data.Player.isShooting = true;
 				}else {Data.Player.isShooting = false;}

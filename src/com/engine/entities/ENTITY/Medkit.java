@@ -27,7 +27,7 @@ public class Medkit extends Entity{
 	public void checkCollisionWithPlayer() {
 		for(int i = 0; i<Data.Medkit.size(); i++) {
 			Entity life = Data.Medkit.get(i);
-			if(life instanceof Medkit) {
+			if(life instanceof Entity) {
 				if(isColliding(life, Data.Player)) {
 					if(Data.Player.health >= Data.Player.maxHealth) {
 						continue;

@@ -5,7 +5,10 @@ import java.awt.image.BufferedImage;
 
 import com.engine.data.Data;
 import com.engine.entities.Entity;
+import com.engine.tile.Solid_Tile;
+import com.engine.tile.UnSolid_Tile;
 import com.engine.world.Camera;
+import com.engine.world.World;
 
 public class Bullet extends Entity{
 	
@@ -29,17 +32,30 @@ public class Bullet extends Entity{
 	}
 	
 	public void update() {
-		depth = 0;			
-		x+=dx*speed;
-		y+=dy*speed;		
-		destroySelf();
+		depth = 0;
 		setCollMask(4, 4, 6, 6);
+		if(World.isFreeMask((int)(x + (dx*speed)), (int)(y + (dy*speed)), collMaskX, collMaskY, collMaskW, collMaskH)) {
+			x+=dx*speed;
+			y+=dy*speed;		
+		}else {					
+			//Método de destruição da parede
+			int bulletX = (this.getX() + this.collMaskX) / World.TILE_SIZE + dx; //Conversão da posição X
+			int bulletY = (this.getY() + this.collMaskY) /World.TILE_SIZE + dy;	 //Conversão da posição Y
+			if(World.tiles[bulletX + (bulletY * World.WIDTH)] instanceof Solid_Tile) {  //Verifica se o a Bullet Colidiu com uma parede
+				//Substituição da parede por uma tile de chão
+				World.tiles[bulletX + (bulletY * World.WIDTH)] = new UnSolid_Tile(bulletX*World.TILE_SIZE, bulletY*World.TILE_SIZE, UnSolid_Tile.Grass01);
+			}
+			Data.Bullet.remove(this);
+		}
+		
+		destroySelf();
+		
 	}
 	
 	public void destroySelf() {	
 		lifeSpam++;
 		if(lifeSpam >= life) {
-			Data.Entity.add(new Explosion(this.getX(), this.getY(), 32, 32, null));			
+			Data.Entity.add(new Explosion((int)x, (int)y, 32, 32, null));			
 			Data.Bullet.remove(this);
 			return;
 		}

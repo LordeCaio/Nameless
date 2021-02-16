@@ -18,7 +18,7 @@ public class Explosion extends Entity{
 		explosion = new BufferedImage[10];
 		
 		for(int i = 0; i < explosion.length; i++) {
-			explosion[i] = Data.spr_Explosion.getSprite(32*i, 32*0, 32, 32);
+			explosion[i] = Data.spr_Explosion.getSprite(32*i, 0, 32, 32);
 		}
 		
 	}

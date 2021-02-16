@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.engine.astar.Node;
 import com.engine.astar.Vector2i;
+import com.engine.data.Data;
 import com.engine.world.Camera;
 import com.engine.world.World;
 
@@ -17,6 +18,7 @@ public class Entity {
 	protected double x, y, speed;	
 	protected int width, height;	
 	protected float xscale, yscale;
+	protected boolean solid;
 	
 	protected int z;	
 	
@@ -57,7 +59,7 @@ public class Entity {
 	public int getW() {
 		return this.width;
 	}
-	
+		
 	public int getH() {
 		return this.height;
 	}	
@@ -146,7 +148,7 @@ public class Entity {
 		}
 		return false;		
 	}
-	
+		
 	public void followPath(List<Node> path) {		
 		if(path != null) {
 			if(path.size() > 0) {
@@ -167,6 +169,21 @@ public class Entity {
 				
 			}
 		}
+	}
+	
+	public boolean isSolid(int xnext, int ynext) {
+		Rectangle current = new Rectangle(xnext + collMaskX, ynext + collMaskY, collMaskW, collMaskH);
+		for(int i = 0; i < Data.Entity.size(); i++) {
+			Entity e = Data.Entity.get(i);
+			if(e instanceof Entity) {
+				Rectangle target = new Rectangle(e.getX() + e.collMaskX, e.getY() + e.collMaskY, e.collMaskW, e.collMaskH);
+				if(current.intersects(target) && e.solid == true) {
+					System.out.println("Exemplo de Solido");
+					return true;
+				}
+			}
+		}		
+		return false;		
 	}
 		
 	public void update() {

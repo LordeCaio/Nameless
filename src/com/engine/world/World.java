@@ -15,6 +15,7 @@ import com.engine.entities.ENEMY.Slime;
 import com.engine.entities.ENTITY.Ammobox;
 import com.engine.entities.ENTITY.Gun;
 import com.engine.entities.ENTITY.Medkit;
+import com.engine.entities.ENTITY.Spawner;
 import com.engine.main.Loop;
 import com.engine.tile.Solid_Tile;
 import com.engine.tile.Tile;
@@ -72,6 +73,13 @@ public class World {
 						tiles[xx + (yy * WIDTH)] = new UnSolid_Tile(xx*TILE_SIZE, yy*TILE_SIZE, UnSolid_Tile.Grass01);
 						Gun gun = new Gun(xx*TILE_SIZE, yy*TILE_SIZE, 32, 32, Data.spr_Collectible_01.getSprite(32*2, 0, 32, 32));
 						Data.Entity.add(gun);
+					}
+					
+					if(currentPixel == 0xffb21f1f) {
+						//Instancia Solida
+						tiles[xx + (yy * WIDTH)] = new UnSolid_Tile(xx*TILE_SIZE, yy*TILE_SIZE, UnSolid_Tile.Grass01);
+						Spawner spawn = new Spawner(xx*TILE_SIZE, yy*TILE_SIZE, 32, 32, Data.spr_Collectible_01.getSprite(32*0, 32*1, 32, 32));
+						Data.Entity.add(spawn);
 					}
 
 					

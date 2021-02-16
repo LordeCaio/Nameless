@@ -13,7 +13,7 @@ import com.engine.tile.UnSolid_Tile;
 public class MiniMap {
 	
 	public static BufferedImage miniMap = new BufferedImage(World.WIDTH, World.HEIGHT, BufferedImage.TYPE_INT_RGB);
-	public static int miniMapPixels[];
+	public static int[] miniMapPixels;
 	
 	public static void miniMapRender(Graphics g) {
 		miniMapPixels = ((DataBufferInt)miniMap.getRaster().getDataBuffer()).getData();
@@ -36,8 +36,7 @@ public class MiniMap {
 		
 		for(int i = 0; i < Data.Enemy.size(); i++) {
 			Enemy e = Data.Enemy.get(i);			
-			miniMapPixels[(e.getX() + e.getFootMask('x'))/World.TILE_SIZE + 
-			              ((e.getY() + e.getFootMask('y'))/World.TILE_SIZE * World.WIDTH)] = 0xFF9A30A2;
+			miniMapPixels[(e.getX() / World.TILE_SIZE) +  (e.getY() / World.TILE_SIZE * World.WIDTH)] = 0xFF9A30A2;
 		}
 		
 	}

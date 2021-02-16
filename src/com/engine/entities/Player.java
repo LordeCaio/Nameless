@@ -18,6 +18,8 @@ public class Player extends Entity{
 	public double speed = 1.15;	
 	
 	public boolean isMoving, isDamaged, hasGun, isShooting;
+	public boolean isMovable;
+	
 	public int dmgFrames = 0;
 	 
 	//Player Stats:
@@ -84,30 +86,36 @@ public class Player extends Entity{
 			y = Math.floor(y);
 		}
 		
+		health = 100;
+		ammo = 30;
 		
-		isMoving = false;		
-		if(key_right && World.isFreeMask(nextRIGHT, this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)) {
+		isMoving = false;
+		if(key_right && World.isFreeMask(nextRIGHT, this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+				&& !isSolid(nextRIGHT, this.getY())) {
 			isMoving = true;			
 			dir = 0;
 			x+=speed;
 		}
-		else if(key_left && World.isFreeMask(nextLEFT, this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)) {
+		else if(key_left && World.isFreeMask(nextLEFT, this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+				&& !isSolid(nextLEFT, this.getY())) {
 			isMoving = true;		
 			dir = 1;
 			x-=speed;
-			}		
-		if(key_down && World.isFreeMask(this.getX(), nextDOWN, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)) {
+		}		
+		if(key_down && World.isFreeMask(this.getX(), nextDOWN, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+				&& !isSolid(this.getX(), nextDOWN)) {
 			isMoving = true;			
 			dir = 2;
 			y+=speed;
 		}
-		else if(key_up && World.isFreeMask(this.getX(), nextUP, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)) {
+		else if(key_up && World.isFreeMask(this.getX(), nextUP, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+				&& !isSolid(this.getX(), nextUP)) {
 			isMoving = true;			
 			dir = 3;
-			y-=speed;
+			y-=speed;			
 		} 
 	}
-	
+			
 	public void jumpEvent() {	
 		if(jump) {
 			if(isJumping == false) {

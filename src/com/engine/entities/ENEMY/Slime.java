@@ -40,24 +40,24 @@ public class Slime extends Enemy{
 	
 	public void moveEvent() {
 		if(isCollidingWithPlayer() == false) {				
-			if((int)x < Data.Player.getX() && World.isFreeMask(nextRIGHT,this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+			if((int)x < Data.Player.getX() & World.isFreeMask(nextRIGHT,this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
 					&& !isColliding(nextRIGHT, this.getY())) {
 				isMirrored = false;
 				x+=speed;							
 				dir = 0;
 			}	
-			else if((int)x > Data.Player.getX() && World.isFreeMask(nextLEFT,this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+			else if((int)x > Data.Player.getX() & World.isFreeMask(nextLEFT,this.getY(), this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
 					&& !isColliding(nextLEFT, this.getY())) {		
 				isMirrored = true;		
 				x-=speed;							
 				dir = 1;
 			}
-			if((int)y < Data.Player.getY() && World.isFreeMask(this.getX(),nextDOWN, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+			if((int)y < Data.Player.getY() & World.isFreeMask(this.getX(),nextDOWN, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
 					&& !isColliding(this.getX(),nextDOWN)) {		
 				y+=speed;
 				dir = 2;
 			}		
-			else if((int)y > Data.Player.getY() && World.isFreeMask(this.getX(),nextUP, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
+			else if((int)y > Data.Player.getY() & World.isFreeMask(this.getX(),nextUP, this.footMaskX, this.footMaskY, this.footMaskW, this.footMaskH)
 					&& !isColliding(this.getX(),nextUP)) {		
 				y-=speed;
 				dir = 3;

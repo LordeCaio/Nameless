@@ -12,6 +12,7 @@ import com.engine.entities.ENTITY.Ammobox;
 import com.engine.entities.ENTITY.Bullet;
 import com.engine.entities.ENTITY.Gun;
 import com.engine.entities.ENTITY.Medkit;
+import com.engine.entities.ENTITY.Solid;
 import com.engine.graphics.Sprite;
 import com.engine.world.Camera;
 
@@ -33,7 +34,10 @@ public class Debug {
 				g.setColor(Color.PINK);
 			}else if(e instanceof Player) {
 				g.setColor(Color.RED);
+			}else if(e instanceof Solid) {
+				g.setColor(Color.CYAN);
 			}
+			
 			g.drawRect(e.getX() + e.getCollMask('x') - Camera.x, e.getY() + e.getCollMask('y') - Camera.y, e.getCollMask('w'), e.getCollMask('h'));
 			g.setColor(Color.WHITE);
 			if(e.getFootMask('x') != 0 | e.getFootMask('y') != 0) {

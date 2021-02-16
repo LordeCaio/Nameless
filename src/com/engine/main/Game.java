@@ -9,6 +9,7 @@ import com.engine.entities.Enemy;
 import com.engine.entities.Entity;
 import com.engine.entities.Player;
 import com.engine.entities.ENTITY.Bullet;
+import com.engine.world.MiniMap;
 import com.engine.world.World;
 
 public class Game{
@@ -29,19 +30,21 @@ public class Game{
 		
 		
 		//Inicialização do Mundo:
-		Data.World = new World("/Maps/map0"+Data.CUR_LEVEL+".png");
+		
+		//Data.World = new World("/Maps/map0"+Data.CUR_LEVEL+".png");
+		Data.World = new World("/Maps/map01_0.png");
 		Data.CUR_STATE = Data.GAME_STATE[0]; 		
 		
 	}
 	
 	public void update() {
-		if(Data.CUR_STATE == Data.GAME_STATE[0] || Data.CUR_STATE == Data.GAME_STATE[1]) {
+		if(Data.CUR_STATE.equals(Data.GAME_STATE[0]) || Data.CUR_STATE.equals(Data.GAME_STATE[1])) {
 			//===Menu==//
 			Data.MENU.update();
 		}		
-		else if(Data.CUR_STATE == Data.GAME_STATE[2]) {
+		else if(Data.CUR_STATE.equals(Data.GAME_STATE[2])) {
 			//===Normal===//
-			if(Data.saveGame == true) {
+			if(Data.saveGame) {
 				Save.createSave();
 			}
 		
@@ -56,19 +59,19 @@ public class Game{
 			}
 			
 			
-			Collections.sort(Data.Entity, Entity.nodeSorter);
+			Data.Entity.sort(Entity.nodeSorter);
 			for(int i = 0; i<Data.Entity.size(); i++) {
 				Entity e = Data.Entity.get(i);
 				e.update();
 			}
 			
-			Collections.sort(Data.Enemy, Enemy.nodeSorter);
+			Data.Enemy.sort(Enemy.nodeSorter);
 			for(int i = 0; i<Data.Bullet.size(); i++) {
 				Bullet e = Data.Bullet.get(i);
 				e.update();
 			}
 		}
-		else if(Data.CUR_STATE == Data.GAME_STATE[3]) {
+		else if(Data.CUR_STATE.equals(Data.GAME_STATE[3])) {
 			//===Game Over==//
 			if(Data.restartGame) {
 				Data.restartGame = false;
@@ -121,7 +124,7 @@ public class Game{
 			Debug.outRender(g);
 		}
 		
-		//MiniMap.miniMapRender(g);
+		MiniMap.miniMapRender(g);
 	}
 
 
